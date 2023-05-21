@@ -1,0 +1,192 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    color:#fff;
+    
+}
+
+.container{
+    max-width: 428px;
+    margin: 0 auto;
+    background-color: #404244;
+    min-height: 100vh;
+}
+
+.header{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2em 0;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,93,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.contact-search{
+    font-size: 1.2em;
+    padding: .8em;
+    border-radius: 100px;
+    outline: none;
+    border: 1px solid #fff;
+}
+
+i{
+    font-size: 1.5em;
+}
+
+.location-name {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+li{
+    padding: ;
+}
+
+hr{
+    border: 2px solid #978c8c;
+}
+
+.list_item{
+    list-style: none;
+}
+
+.id{
+    width: 6em;
+    text-align: center;
+    padding: 1.4em 2.5em;
+    border-radius: 100px;
+    /* border-top-left-radius: 0; */
+    background-color: #096679;
+    font-size: .8em;
+}
+
+.location-section{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding: 0 1.5em;
+    transition: 0.3s;
+}
+
+
+.contact-section:hover{
+ background-color: rgb(50, 198, 224);
+}
+
+.text{
+    padding-left: 1em;
+}
+
+a{
+    text-decoration: none;
+    color:#fff;
+}
+
+
+/* employee section  */
+
+
+/* style-profile section */
+.hero {
+
+padding: 2em 0;
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,93,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.back-btn{
+    font-size: 1.7em;
+    padding-left: 1em;
+}
+
+.hero-info{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.contact-info{
+    padding: 3em 1.5em;
+
+}
+
+.info-line{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    align-items: center;
+    padding: 1em 2em;
+    margin-top: 2em;    
+    border-radius: 20px;
+    box-shadow: inset 11px 11px 22px #2f3135,
+            inset -11px -11px 22px #33373b;
+
+}
+
+.info-line p{
+    margin: 0;
+    padding-left: 2em;
+}
+
+.icon-gradient{
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,121,93,1) 35%, rgba(0,212,255,1) 100%);
+    border-radius: 100px;
+    padding: .5em;
+}
+
+.edit-contact{
+    padding: 1.5em 2.5em;
+    text-align: center;
+}
+
+
+/* edit profile section */
+
+.type{
+    border: none;
+    background: none;
+    padding-left: 2em;
+    font-size: 1.2em;
+    outline: none;
+    color: #fff;
+
+
+}
+
+.button-container {
+    padding: 2em 3.5em;
+}
+
+.update-contact{
+    display: flex;
+    width: 90%;
+    margin: 0 auto;
+    align-items: center;
+    padding: 1em 2em;
+    border-radius: 20px;
+    box-shadow: inset 11px 11px 22px #2f3135,
+    inset -11px -11px 22px #33373b;
+}
+
+.button{
+    border: none;
+    font-size: 1.3em;
+    padding-left: 1.5em;
+    outline: none;
+    color: #fff;
+    background-color:  #404244;
+}
+
+/* delete contact section */
+
+.button-container p{
+    text-align: center;
+    padding-bottom: 2em;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <!-- fontawesome icons -->
+  <link rel="stylesheet" href="fontawesome/css/fontawesome.min.css">
+    <!-- fontawesome kit -->
+ <script src="https://kit.fontawesome.com/9f086f74ea.js" crossorigin="anonymous"></script>
+
+  
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="contact-list.css">
+
+    <title>Edit Contact</title>
+</head>
+<body>
+
+    <div class="container">
+        <header class="hero">
+           <a href="employee-profile.html">
+               <i class="fas fa-arrow-left back-btn"></i>
+           </a>
+
+           <div class="hero-info"> 
+               <h1 class="name">Kris Kovnot</h1>
+               <p class="locationID"></p>
+           </div>
+        </header>
+
+    <section class="contact-info">
+        <div class="info-line">
+            <i class="fa fa-phone icon-gradient"></i>
+           <input type="text" class="type" name="fullname" placeholder="Full Name">
+        </div>
+
+        <div class="info-line">
+            <i class="fa fa-phone icon-gradient"></i>
+           <input type="text" class="type" name="locationID" placeholder="Location">
+        </div>
+
+        <div class="info-line">
+            <i class="fas fa-envelope icon-gradient"></i>
+            <input type="text" class="type" name="department" placeholder="Department">
+        </div>
+
+        <div class="info-line">
+            <i class="fas fa-envelope icon-gradient"></i>
+            <input type="text" class="type" name="department" placeholder="Job Title">
+        </div>
+
+        <div class="info-line">
+            <i class="fas fa-at icon-gradient"></i>
+            <input type="text" class="type" name="email" placeholder="Email">
+        </div>
+
+        <div class="info-line">
+            <i class="fas fa-map-marker-alt icon-gradient"></i>
+            <input type="text" class="type" name="address" placeholder="Address">
+        </div>
+
+        <div class="info-line">
+            <i class="fas fa-at icon-gradient"></i>
+            <input type="number" class="type" name="phone-number" placeholder="Phone number">
+        </div>
+     </section>
+
+     <section class="button-container">
+        <a href="#">
+            <div class="update-contact">
+                <i class="fas fa-check-circle icon-gradient"></i>
+                <button class="button">Save Contact</button>
+            </div>
+        </a>
+     </section>
+
+     <section class="button-container">
+        <a href="delete.html">
+            <div class="update-contact">
+                <i class="fas fa-trash icon-gradient"></i>
+                <button class="button">Delete Contact</button>
+            </div>
+        </a>
+     </section>
+    </div>
+    
+</body>
+</html>
