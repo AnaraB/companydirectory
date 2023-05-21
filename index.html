@@ -163,11 +163,12 @@
       </div>
     </div>
 
+    <!-- modal to edit  -->
     <div class="modal" id="editEmployee" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Edit employee</h5>
+            <h5 class="modal-title">Edit employee details</h5>
             <button
               type="button"
               class="btn-close"
@@ -178,30 +179,60 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label"
-                  >Email address</label
+                <label for="firstNameInput" class="form-label"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstNameInput"
+                  aria-describedby="firstNameHelp"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="lastNameInput" class="form-label"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastNameInput"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="emailInput" class="form-label"
+                  >Email</label
                 >
                 <input
                   type="email"
                   class="form-control"
-                  id="exampleInputEmail1"
+                  id="emailInput"
                   aria-describedby="emailHelp"
                 />
-                <div id="emailHelp" class="form-text">
-                  We'll never share your email with anyone else.
-                </div>
               </div>
               <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label"
-                  >Password</label
+                <label for="departmentInput" class="form-label"
+                  >Department</label
                 >
                 <input
-                  type="password"
+                  type="text"
                   class="form-control"
-                  id="exampleInputPassword1"
+                  id="departmentInput"
+                  aria-describedby="departmentHelp"
                 />
               </div>
-              <div class="mb-3 form-check">
+              <div class="mb-3">
+                <label for="LocationInput" class="form-label"
+                  >Location</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="locationInput"
+                  aria-describedby="locationHelp"
+                />
+              </div>
+              <!-- <div class="mb-3 form-check">
                 <input
                   type="checkbox"
                   class="form-check-input"
@@ -210,7 +241,7 @@
                 <label class="form-check-label" for="exampleCheck1"
                   >Check me out</label
                 >
-              </div>
+              </div> -->
             </form>
           </div>
           <div class="modal-footer">
@@ -226,6 +257,25 @@
         </div>
       </div>
     </div>
+
+    <!-- modal to delete -->
+    <div class="modal" id="deleteEmployee" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Delete employee</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to delete employee details?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <script src="libs/js/jquery-3.7.0.min.js"></script>
     <!-- boostrap -->
     <script
