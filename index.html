@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="libs/css/style.css">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,9 +15,11 @@
     <title>Company Directory</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark shadow small mb-3">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Company Directory</a>
+        <a class="navbar-brand" href="#">
+          <span class="brand-gradient">Company Directory</span>
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -29,6 +32,18 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+          <span class="navbar-nav mx-3 mb-lg-0" role="navigation">             
+            <select class="btn btn-success dropdown-toggle" name="locationInput" id="selectLocation">
+                <option>Location</option>
+              </select>  
+          </span>
+          
+          <span class="navbar-nav me-auto mb-2 mb-lg-0" role="navigation">             
+            <select class="btn btn-success dropdown-toggle" name="departmentInput" id="selectDepartment">
+                <option>Department</option>
+              </select>  
+            </span>
          
           <form class="d-flex" role="search">
             <input
@@ -36,11 +51,280 @@
               type="search"
               placeholder="Search"
               aria-label="Search"
+              id="search"
             />
-            <button class="btn btn-outline-success" type="submit">
-              Search
+            <button class="btn btn-sm btn-success" type="submit">
+            <!-- Search Icon -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
             </button>
           </form>
+          
+         <!-- dropdown to add employee, departmemt or location-->
+
+          <div class="dropdown">
+            <button class="btn btn-warning ms-3 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Add
+                <!-- icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addEmployee" class="dropdown-item">Employee</button>
+              
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addDepartment" class="dropdown-item">Department</button>
+              
+                <button type="button" data-bs-toggle="modal" data-bs-target="#addLocation" class="dropdown-item">Location</button>
+             
+           
+            </div>
+          </div>
+
+
+           <!-- Add employee modal -->
+           <div class="modal fade" id="addEmployee" tabindex="-1" area-labelledby="addEmployee-label">
+             <div class="modal-dialog modal-dialog-centered">
+               <div class="modal-content">
+                 <div class="modal-header text-bg-dark">
+                   <h5 class="modal-title">Add Employee details</h5>
+                   <button
+                     type="button"
+                     class="btn-close btn-close-white"
+                     data-bs-dismiss="modal"
+                     aria-label="Close"
+                   ></button>
+                 </div>
+                 <div class="modal-body">
+                   <form name="employeeFrom" class="validated-form" onsubmit="runMe(); return false" novalidate>
+                     <div class="container">
+                       <div class="row">
+                         <div class="col-md-12">
+                           <div class="mb-3"> 
+                             <input type="date" class="form-control form-control-sm" required>
+
+                           </div>
+                         </div>
+
+                         <div class="col-md-6">
+                              <div class="mb-3">
+                              <input
+                              type="text"
+                              class="form-control form-control-sm"
+                              placeholder="First Name"
+                              aria-describedby="firstNameHelp"
+                              required
+                            />
+                              </div>
+                         </div>
+                         <div class="col-md-6">
+                          <div class="mb-3">
+                          <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          placeholder="Last Name"
+                          aria-describedby="LasttNameHelp"
+                          required
+                        />
+                          </div>
+                         </div>
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                          <input
+                          type="email"
+                          class="form-control form-control-sm"
+                          placeholder="Email"
+                          aria-describedby="emailHelp"
+                          required
+                        />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                          <input
+                          type="text"
+                          class="form-control form-control-sm"
+                          placeholder="Location"
+                          aria-describedby="locationHelp"
+                          required
+                        />
+                          </div>
+                        </div>
+                        <div class="md-12">
+                          <div class="mb-3">
+                            <select class="form-select form-select-sm" name="departmentInput" id="selectDepartmentAddEmployee">
+                              <option>Department</option>
+                            </select> 
+                           </div>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="d-grid"> 
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-success">
+                             Add Employee
+                            </button>
+                          </div>
+                        </div>
+                        <div class="col-md-2">
+                          <div class="d-grid"> 
+                            <button
+                                type="button"
+                                class="btn btn-sm btn-warning"
+                                data-bs-dismiss="modal"
+                                aria-label="Close">
+                             Close
+                            </button>
+                          </div>
+                        </div>
+                     </div>
+                   </div>
+                  </form>
+                 </div>
+              </div>      
+           </div>
+           </div>  
+           <!-- end of modal -->
+
+           <!-- Add department modal -->
+           <div class="modal fade" id="addDepartment" tabindex="-1" area-labelledby="addDepartment-label">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header text-bg-dark">
+                  <h5 class="modal-title">Add New Department</h5>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form name="newDepatmentFrom">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="mb-3"> 
+                            <input type="date" class="form-control form-control-sm" required>
+
+                          </div>
+                        </div>
+
+                        <div class="col-md-6">
+                             <div class="mb-3">
+                             <input
+                             type="text"
+                             class="form-control form-control-sm"
+                             placeholder="Department Name"
+                             aria-describedby="DepartmentNameHelp"
+                             required
+                           />
+                             </div>
+                        </div>
+                        
+                       <div class="col-md-10">
+                         <div class="d-grid"> 
+                           <button
+                               type="button"
+                               class="btn btn-sm btn-success">
+                            Add Department
+                           </button>
+                         </div>
+                       </div>
+                       <div class="col-md-2">
+                         <div class="d-grid"> 
+                           <button
+                               type="button"
+                               class="btn btn-sm btn-warning"
+                               data-bs-dismiss="modal"
+                               aria-label="Close">
+                            Close
+                           </button>
+                         </div>
+                       </div>
+                    </div>
+                  </div>
+                 </form>
+                </div>
+             </div>      
+          </div>
+          </div>  
+           <!-- end of modal  -->
+
+            <!-- Add location modal -->
+            <div class="modal fade" id="addLocation" tabindex="-1" area-labelledby="addLocation-label">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header text-bg-dark">
+                    <h5 class="modal-title">Add New Location</h5>
+                    <button
+                      type="button"
+                      class="btn-close btn-close-white"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="newDepatmentFrom">
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="mb-3"> 
+                              <input type="date" class="form-control form-control-sm" required>
+  
+                            </div>
+                          </div>
+  
+                          <div class="col-md-6">
+                               <div class="mb-3">
+                               <input
+                               type="text"
+                               class="form-control form-control-sm"
+                               placeholder="Location Name"
+                               aria-describedby="LocationNameHelp"
+                               required
+                             />
+                               </div>
+                          </div>
+                          
+                         <div class="col-md-10">
+                           <div class="d-grid"> 
+                             <button
+                                 type="button"
+                                 class="btn btn-sm btn-success">
+                              Add Location
+                             </button>
+                           </div>
+                         </div>
+                         <div class="col-md-2">
+                           <div class="d-grid"> 
+                             <button
+                                 type="button"
+                                 class="btn btn-sm btn-warning"
+                                 data-bs-dismiss="modal"
+                                 aria-label="Close">
+                              Close
+                             </button>
+                           </div>
+                         </div>
+                      </div>
+                    </div>
+                   </form>
+                  </div>
+               </div>      
+            </div>
+            </div>  
+             <!-- end of modal  -->
+
+      </div>   
+   </div>
+    
+ 
+
+
+         
         </div>
       </div>
     </nav>
@@ -99,21 +383,18 @@
               aria-labelledby="home-tab"
               tabindex="0"
             >
-            <table class="table table-stripped">
+            <table class="table table-sm small table-bordered table align-middle mb-0">
               <thead>
                 <tr>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Email</th>
-                  <th scope="col">Department</th>
-                  <!-- <th scope="col">Job Title</th> -->
-                  <th scope="col">Location</th>
-                  <th></th>
-                  <th></th>
+                  <th scope="col">ID</th>
+                  <th scope="col">First name </th>
+                  <th scope="col">Last name</th>
+                  <th>Details</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
-              <tbody id="employeesList">
-              </tbody>
+              <tbody id="employeesList"></tbody>
             </table>
             </div>
             <div
@@ -123,14 +404,12 @@
               aria-labelledby="profile-tab"
               tabindex="1"
             >
-            <table class="table table-stripped">
+            <table class="table table-sm small table-bordered table align-middle mb-0"">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
                   <th scope="col">Departments</th>
-                  <th scope="col">LocationID</th>
-                  <th></th>
-                  <th></th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody id="departmentsList">
@@ -144,13 +423,12 @@
               aria-labelledby="contact-tab"
               tabindex="2"
             >
-            <table class="table table-stripped">
+            <table class="table table-sm small table-bordered table align-middle mb-0"">
               <thead>
                 <tr>
-                  <th scope="col">ID</th>
                   <th scope="col">Location</th>
-                  <th></th>
-                  <th></th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody id="locationsList">
@@ -158,124 +436,185 @@
             </table>
             </div>
           </div>
+
           
+
+   <!-- modal to view detail  -->
+   <div class="modal fade" id="employeeDetails" tabindex="-1" area-labelledby="addEmployee-label">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-bg-secondary">
+          <h5 class="modal-title">Employee details</h5>
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </div>
-      </div>
-    </div>
+        <div class="modal-body p-0">
+           <table class="table table-border small mb-0">
+            <thead>
+            <tr>
+                <th class="w-50">ID</th>
+            </tr>
+            <tr>
+                <th>First name </th>
+            </tr>
+            <tr>
+                <th>Last name</th>
+            </tr>
+            <tr>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <th>Department</th>
+             </tr>
+             <tr>
+                <th>Location</th>
+            </tr>
+          </thead>     
+           </table>
+        <div class="modal-footer">
+          <button
+          type="button"
+          class="btn btn-sm btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+
+
+        </div>
+        </div>
+     </div>      
+  </div>
+  </div>
+
+  <!-- end of view employee details modal -->
+   
 
     <!-- modal to edit  -->
-    <div class="modal" id="editEmployee" tabindex="-1">
-      <div class="modal-dialog">
+    <div class="modal fade" id="editEmployee" tabindex="-1" area-labelledby="editEmployee-label">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit employee details</h5>
+          <div class="modal-header text-bg-dark">
+            <h5 class="modal-title">Edit Employee details</h5>
             <button
               type="button"
-              class="btn-close"
+              class="btn-close btn-close-white"
               data-bs-dismiss="modal"
               aria-label="Close"
             ></button>
           </div>
           <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="firstNameInput" class="form-label"
-                  >First Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="firstNameInput"
-                  aria-describedby="firstNameHelp"
-                />
+            <form name="employeeFrom" class="validated-form" onsubmit="runMe(); return false" novalidate>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mb-3"> 
+                      <input type="date" class="form-control form-control-sm" required>
+
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                       <div class="mb-3">
+                       <input
+                       type="text"
+                       class="form-control form-control-sm"
+                       placeholder="First Name"
+                       aria-describedby="firstNameHelp"
+                       required
+                     />
+                       </div>
+                  </div>
+                  <div class="col-md-6">
+                   <div class="mb-3">
+                   <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   placeholder="Last Name"
+                   aria-describedby="LasttNameHelp"
+                   required
+                 />
+                   </div>
+                  </div>
+                 <div class="col-md-6">
+                   <div class="mb-3">
+                   <input
+                   type="email"
+                   class="form-control form-control-sm"
+                   placeholder="Email"
+                   aria-describedby="emailHelp"
+                   required
+                 />
+                   </div>
+                 </div>
+                 <div class="col-md-6">
+                   <div class="mb-3">
+                   <input
+                   type="text"
+                   class="form-control form-control-sm"
+                   placeholder="Location"
+                   aria-describedby="locationHelp"
+                   required
+                 />
+                   </div>
+                 </div>
+                 <div class="md-12">
+                   <div class="mb-3">
+                     <select class="form-select form-select-sm" name="departmentInput" id="selectDepartmentAddEmployee">
+                       <option>Department</option>
+                     </select> 
+                    </div>
+                 </div>
+                 <div class="col-md-10">
+                   <div class="d-grid"> 
+                     <button
+                         type="button"
+                         class="btn btn-sm btn-success">
+                      Edit Employee
+                     </button>
+                   </div>
+                 </div>
+                 <div class="col-md-2">
+                   <div class="d-grid"> 
+                     <button
+                         type="button"
+                         class="btn btn-sm btn-warning"
+                         data-bs-dismiss="modal"
+                         aria-label="Close">
+                      Close
+                     </button>
+                   </div>
+                 </div>
               </div>
-              <div class="mb-3">
-                <label for="lastNameInput" class="form-label"
-                  >Last Name</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="lastNameInput"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="emailInput" class="form-label"
-                  >Email</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  id="emailInput"
-                  aria-describedby="emailHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="departmentInput" class="form-label"
-                  >Department</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="departmentInput"
-                  aria-describedby="departmentHelp"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="LocationInput" class="form-label"
-                  >Location</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="locationInput"
-                  aria-describedby="locationHelp"
-                />
-              </div>
-              <!-- <div class="mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label class="form-check-label" for="exampleCheck1"
-                  >Check me out</label
-                >
-              </div> -->
-            </form>
+            </div>
+           </form>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
+       </div>      
     </div>
+    </div>  
+    <!-- end of edit modal -->
 
     <!-- modal to delete -->
     <div class="modal" id="deleteEmployee" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Delete employee</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body text-center d-flex justifu-content-between align-items-center">
+              <h4 class="fw-light m-0">Are you sure you want to delete this information?</h4>
             </div>
-            <div class="modal-body">
-              <p>Are you sure you want to delete employee details?</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-footer d-flex justifu-content-center">
+              <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">No, go back</button>
             </div>
           </div>
         </div>
-      </div>
+    </div>
+    <!-- end of delete modal -->
+
+
     <script src="libs/js/jquery-3.7.0.min.js"></script>
     <!-- boostrap -->
     <script
@@ -292,3 +631,13 @@
     <script src="libs/js/script.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
