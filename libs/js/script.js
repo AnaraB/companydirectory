@@ -26,12 +26,11 @@ $.ajax({
     method: 'GET',
     url: 'libs/php/getAll.php',
     success: function(result) {
-        console.log(result);
         const data = result.data;
         populateEmployeesTab(data); 
    
-        const employeesNumber = data.length;
-        console.log(employeesNumber);
+        //const employeesNumber = data.length;
+    
     },
     error: function(error) {
         console.error(error);
@@ -46,8 +45,8 @@ function populateEmployeesTab(data) {
             <td>${++i}</td>
             <td>${val.firstName}</td>
             <td>${val.lastName}</td>
-            <td><button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#employeeDetails">Details</button></td>
-            <td><button class="btn btn-sm btn-warning editEmployee" data-bs-toggle="modal" data-bs-target="#editEmployee">edit</button></td>
+            <td><button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewEmployeeDetails">Details</button></td>
+            <td><button class="btn btn-sm btn-warning editEmployee" data-bs-toggle="modal" data-bs-target="#employeeDetails">edit</button></td>
             <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployee">delete</button></td>
         
         </tr>
@@ -63,7 +62,6 @@ $.ajax({
     method: 'GET',
     url: 'libs/php/getAllDepartments.php',
     success: function(result) {
-        console.log(result);
         const data = result.data;
         populateDepartmentsDropdown(data); 
         populateDepartmentsTab(data); 
@@ -79,7 +77,7 @@ $.ajax({
 function populateDepartmentsDropdown(data) {
 
     data.forEach(function (val, i, arr) {
-        $('#selectDepartment').append($('<option>', {
+        $('.selectDepartment').append($('<option>', {
         value: val.id,
         text: val.name
         }));
@@ -107,7 +105,6 @@ $.ajax({
     method: 'GET',
     url: 'libs/php/getAllLocations.php',
     success: function(result) {
-        console.log(result);
         const data = result.data;
         populateLocationsTab(data); 
         populateLocationsDropdown(data);
@@ -165,23 +162,41 @@ function populateLocationsDropdown(data) {
       form.classList.add('was-validated')
     }, false)
   })
-}
+}   
+    
+$('#employeeDetails').on('click', function() {
+    $('#employeeDetailsAction').html('Add Employee Details');
+});
 
-$(document).ready(function($) {
-    $('.editEmployee').on('click', function() {
-        const employeeDetails = JSON.parse($(this).closest('tr').attr('data-employee-record'));
-    console.log(employeeDetails);
-    if(employeeDetails){
-        // $('#editEmployee').empty();
-
-     $('#firstNameInput').val(employeeDetails.firstName);
-     $('#lastNameInput').val(employeeDetails.lastName);
-     $('#emailInput').val(employeeDetails.email);
-     $('#departmentInput').val(employeeDetails.department);
-     $('#locationInput').val(employeeDetails.location);
+// Event binding on dynamically created elements:
+$(document).on('click', '.editEmployee', function() {
+    $('#employeeDetailsAction').html('Edit Employee Details');
+    const employeeDetails = JSON.parse($(this).closest('tr').attr('data-employee-record'));
+    if (employeeDetails) {
+      $('#firstNameInput').val(employeeDetails.firstName);
+      $('#lastNameInput').val(employeeDetails.lastName);
+      $('#emailInput').val(employeeDetails.email);
+      // Set employee's department:
+      $('#departmentSelect > option').each(function(i, elem) {
+          if ($(elem).text() === employeeDetails.department) {
+              $(elem).attr('selected', true);
+          }
+      });
     }
 });
-})
 
 
 
+
+
+
+// $('button.delete').on('click', function(e) {
+//     e.preventDefault();
+//     if(confirm()){
+//       var frm = $("<form>");
+//       frm.attr('method', 'post');
+//       frm.attr('action', $(this).attr('href'));
+//       frm.appendTo('body');
+//       frm.submit();
+//     }
+// });
