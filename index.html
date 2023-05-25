@@ -35,13 +35,13 @@
 
           <span class="navbar-nav mx-3 mb-lg-0" role="navigation">             
             <select class="btn btn-success dropdown-toggle" name="locationInput" id="selectLocation">
-                <option>Location</option>
+                <option value="">Location</option>
               </select>  
           </span>
           
           <span class="navbar-nav me-auto mb-2 mb-lg-0" role="navigation">             
             <select class="btn btn-success dropdown-toggle selectDepartment" name="departmentInput">
-                <option>Department</option>
+                <option value="">Department</option>
               </select>  
             </span>
          
@@ -65,9 +65,10 @@
          <!-- dropdown to add employee, departmemt or location-->
 
           <div class="dropdown">
-            <button class="btn btn-warning dropdown-toggle ms-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Add
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <button class="btn btn-warning dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              ADD
+          
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                 <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
               </svg>
               <i class="fa-solid fa-circle-plus"></i>
@@ -222,14 +223,11 @@
 
       </div>   
    </div>
+  </nav>
     
+      
+      <!-- Table navigation tabs -->
  
-
-
-<!-- Table navigation tabs -->
-        </div>
-      </div>
-    </nav>
     <div class="container">
       <div class="row">
         <div class="col">
@@ -342,7 +340,7 @@
           
 
    <!-- modal to view detail  -->
-   <div class="modal fade" id="viewEmployeeDetails" tabindex="-1" area-labelledby="addEmployee-label">
+   <div class="modal fade" tabindex="-1" id="view" area-labelledby="addEmployee-label">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header text-bg-secondary">
@@ -355,28 +353,13 @@
           ></button>
         </div>
         <div class="modal-body p-0">
-           <table class="table table-border small mb-0">
-            <thead>
-            <tr>
-                <th class="w-50">ID</th>
-            </tr>
-            <tr>
-                <th>First name </th>
-            </tr>
-            <tr>
-                <th>Last name</th>
-            </tr>
-            <tr>
-                <th>Email</th>
-            </tr>
-            <tr>
-                <th>Department</th>
-             </tr>
-             <tr>
-                <th>Location</th>
-            </tr>
-          </thead>     
-           </table>
+          <ul class="list-group list-unstyled">
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="employeeName"></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="email"></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="department"></li>
+            <li class="list-group-item d-flex justify-content-between align-items-center" id="location"></li>
+          </ul>
+
         <div class="modal-footer">
           <button
           type="button"
@@ -465,7 +448,8 @@
                    <div class="d-grid"> 
                      <button
                          type="button"
-                         class="btn btn-sm btn-success">
+                         class="btn btn-sm btn-success"
+                         id="changeToAdd">
                       Edit Employee
                      </button>
                    </div>
@@ -492,7 +476,7 @@
 
     <!-- modal to delete -->
     <div class="modal" id="deleteEmployee" tabindex="-1">
-        <div class="modal-dialog">
+        <div class="modal-dialog  modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body text-center d-flex justifu-content-between align-items-center">
               <h4 class="fw-light m-0">Are you sure you want to delete this information?</h4>

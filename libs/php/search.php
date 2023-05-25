@@ -31,48 +31,101 @@
 		exit;
 
 	}	
+   
+	$searchTerm = "%" . $_REQUEST["search_value"] . "%";
 
+ 
 
-   if(isset($_GET['searchButton'])){
-    
-    $search = $_GET['search'];
-    $sql =' SELECT * FROM personnel 
-    WHERE search_value LIKE :search 
-    OR  department  LIKE :search
-    OR  locations LIKE :search  ';
-    $query = $conn->prepare($sql);
-
-    $query->bindValue(':search','%'.$search.'%');
-  
-    $query->execute();
-
-    $result = $conn->query($query);
+	$sqlStr = "SELECT p.id, p.lastName, p.firstName, p.jobTitle, p.email,
 	
-	if (!$result) {
-
-		$output['status']['code'] = "400";
-		$output['status']['name'] = "executed";
-		$output['status']['description'] = "query failed";	
-		$output['data'] = [];
-
-		mysqli_close($conn);
-
-		echo json_encode($output); 
-
-		exit;
-
+				d.name as department, l.name as location
+	
+				FROM personnel p
+	
+				LEFT JOIN department d ON (p.departmentID = d.id)
+	
+				LEFT JOIN location l ON (d.locationID = l.id)
+	
+				WHERE (p.firstName LIKE '$searchTerm' OR p.lastName LIKE '$searchTerm')";
+	
+	 
+	
+	if (isset($_REQUEST["department"]) and strlen($_REQUEST["department"]) > 0) {
+	
+		$sqlStr = $sqlStr . " and d.id =" . $_REQUEST["department"];
+	
 	}
-
-    $output['status']['code'] = "200";
-	$output['status']['name'] = "ok";
-	$output['status']['description'] = "success";
-	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data'] = $result;
+	
+	 
+	
+	if (isset($_REQUEST["location"]) and strlen($_REQUEST["location"]) > 0) {
+	
+		$sqlStr = $sqlStr . " and l.id =" . '"' . $_REQUEST["location"] . '"';
+	
+	}
+	
+	 
+	
+	$query = $conn->query($sqlStr);
+	
+	 
+	
+	if (!$query) {
+	
+		$output["status"]["code"] = "400";
+	
+		$output["status"]["name"] = "executed";
+	
+		$output["status"]["description"] = "query failed";
+	
+		$output["data"] = [];
+	
+	 
+	
+		mysqli_close($conn);
+	
+	 
+	
+		echo json_encode($output);
+	
+	 
+	
+		exit();
+	
+	}
+	
+	 
+	
+	$personnel = [];
+	
+	 
+	
+	while ($row = mysqli_fetch_assoc($query)) {
+	
+		array_push($personnel, $row);
+	
+	}
+	
+	 
+	
+	$output["status"]["code"] = "200";
+	
+	$output["status"]["name"] = "ok";
+	
+	$output["status"]["description"] = "success";
+	
+	$output["status"]["returnedIn"] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+	
+	$output["data"]["personnel"] = $personnel;
+	
+	 
 	
 	mysqli_close($conn);
-
-	echo json_encode($output); 
-
-   }
+	
+	 
+	
+	echo json_encode($output);
+	
+	?>
 
 	

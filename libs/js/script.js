@@ -12,6 +12,7 @@ $('#search').on('keyup', function (){
             search_value: searchValue
         },
         success: function(result){
+            console.log(result);
 
         },
         error: function(error) {
@@ -27,7 +28,9 @@ $.ajax({
     url: 'libs/php/getAll.php',
     success: function(result) {
         const data = result.data;
-        populateEmployeesTab(data); 
+   
+        populateEmployeesTab(data);
+   
    
         //const employeesNumber = data.length;
     
@@ -45,17 +48,34 @@ function populateEmployeesTab(data) {
             <td>${++i}</td>
             <td>${val.firstName}</td>
             <td>${val.lastName}</td>
-            <td><button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#viewEmployeeDetails">Details</button></td>
-            <td><button class="btn btn-sm btn-warning editEmployee" data-bs-toggle="modal" data-bs-target="#employeeDetails">edit</button></td>
-            <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployee">delete</button></td>
+            <td><button class="btn btn-sm btn-primary viewEmployeeDetails" data-bs-toggle="modal" data-bs-target="#view">Details</button></td>
+            <td><button class="btn btn-sm btn-warning editEmployee" data-bs-toggle="modal" data-bs-target="#employeeDetails">Edit</button></td>
+            <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployee">Delete</button></td>
         
         </tr>
          
         
     `);
     });
-   
+    
+           
 }
+
+$(document).on('click', '.viewEmployeeDetails', function() {
+   
+    const employee = JSON.parse($(this).closest('tr').attr('data-employee-record'));
+    const name = employee.firstName;
+    const surname = employee.lastName;
+    const employeeName = name.concat(' ',surname);
+    if (employee) {
+      $('#employeeName').html(employeeName);
+      $('#email').html(employee.email);
+      $('#department').html(employee.department);
+      $('#location').html(employee.location);
+ 
+    }
+})
+
 
 
 $.ajax({
@@ -164,9 +184,14 @@ function populateLocationsDropdown(data) {
   })
 }   
     
-$('#employeeDetails').on('click', function() {
+
+
+$('#addEmployee').on('click', function() {
+   $('#addEmployee').empty();
     $('#employeeDetailsAction').html('Add Employee Details');
+    $('#changeToAdd').html('Add new employee');
 });
+
 
 // Event binding on dynamically created elements:
 $(document).on('click', '.editEmployee', function() {
@@ -184,9 +209,6 @@ $(document).on('click', '.editEmployee', function() {
       });
     }
 });
-
-
-
 
 
 
