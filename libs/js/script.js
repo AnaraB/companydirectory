@@ -1,5 +1,7 @@
 'use strict';
 
+//------------------------------------------------SEARCH section--------------------------------------------//
+
 $('#searchSubmit').on('click', function (){
     
     $.ajax({
@@ -21,7 +23,7 @@ $('#searchSubmit').on('click', function (){
     })
 })
 
-// ------------------------------------------------ PERSONNEL section-------------------------------------------//
+////---------------------------------------------------------- PERSONNEL section--------------------------------------------------////
 getAll();
 
 function getAll() {
@@ -66,6 +68,7 @@ function populateEmployeesTab(data) {
     
            
 }
+//////////// VIEW EMPLOYEE DETAILS modal ////////////////
 
 $(document).on('click', '.viewEmployeeDetails', function() {
    
@@ -83,46 +86,7 @@ $(document).on('click', '.viewEmployeeDetails', function() {
     }
 })
 
-$('#submitEmployeeDetails').on('click', function (){
-    $.ajax({
-        method:'POST',
-        url:'libs/php/insertEmployee.php',
-        data: {
-            employee_id: $('#employeeIDInput').val(),
-            first_name: $('#firstNameInput').val(),
-            last_name: $('#lastNameInput').val(),
-            email: $('#emailInput').val(),
-            job_title: $('#jobTitleInput').val(),
-            department: $('#departmentSelect').val()
-        },
-        success: function(result){
-            console.log('insert', result);
-            $('#employeeAlert').text(result.data.message).removeClass('d-none');
-            getAll();
-            
-        },
-        error: function(error){
-            console.error(error);
-        }
-
-    });
-
-});
-
-// populating addEmployee modal
-
-$('#addEmployee').on('click', function() {
-    $('#employeeIDInput').val('');
-    $('#firstNameInput').val('');
-    $('#lastNameInput').val('');
-    $('#emailInput').val('');
-    $('#jobTitleInput').val('');
-    $('#departmentSelect').val('');
-    $('#employeeDetailsAction').html('Add Employee Details');
-    $('#submitEmployeeDetails').html('Add new employee');
-    $('#employeeAlert').addClass('d-none');
-});
-
+//////////// EDIT EMPLOYEE DETAILS modal ////////////////
 
 // Event binding on dynamically created elements:
 $(document).on('click', '.editEmployee', function() {
@@ -151,9 +115,53 @@ $(document).on('click', '.editEmployee', function() {
     }
 });
 
+//////////// ADD EMPLOYEE modal ////////////////
+
+$('#addEmployee').on('click', function() {
+    $('#employeeIDInput').val('');
+    $('#firstNameInput').val('');
+    $('#lastNameInput').val('');
+    $('#emailInput').val('');
+    $('#jobTitleInput').val('');
+    $('#departmentSelect').val('');
+    $('#employeeDetailsAction').html('Add Employee Details');
+    $('#submitEmployeeDetails').html('Add new employee');
+    $('#employeeAlert').addClass('d-none');
+});
 
 
-//---------------------------------------- DEPARTMENTS section-----------------------------------------------------//
+$('#submitEmployeeDetails').on('click', function (){
+    $.ajax({
+        method:'POST',
+        url:'libs/php/insertEmployee.php',
+        data: {
+            employee_id: $('#employeeIDInput').val(),
+            first_name: $('#firstNameInput').val(),
+            last_name: $('#lastNameInput').val(),
+            email: $('#emailInput').val(),
+            job_title: $('#jobTitleInput').val(),
+            department: $('#departmentSelect').val()
+        },
+        success: function(result){
+            console.log('insert', result);
+            $('#employeeAlert').text(result.data.message).removeClass('d-none');
+            getAll();
+            
+        },
+        error: function(error){
+            console.error(error);
+        }
+
+    });
+
+});
+
+//////////// DELETE EMPLOYEE modal ////////////////
+
+
+
+
+////------------------------------------------------- DEPARTMENTS section----------------------------------------------------------////
 getAllDepartments();
 
 function getAllDepartments() {
@@ -202,6 +210,40 @@ function populateDepartmentsTab(data) {
 }
  
 
+
+
+//////////////////////// EDIT DEPARTMENT modal //////////////////////
+
+$(document).on('click', '.editDepartment', function() {
+    $('#departmentDetailsAction').html('Edit Department Details');
+    $('#submitDepartment').html('Update');
+    $('#departmentAlert').addClass('d-none');
+
+    const department = JSON.parse($(this).closest('tr').attr('data-location-record'));
+    if(department){
+    $('#departmentIDInput').val(department.id);
+    $('#newDepartmentInput').val(department.name);
+    // Set department's location:
+    $('#locationSelect > option').each(function(i, elem) {
+        if ($(elem).val() === department.locationID) {
+            $(elem).attr('selected', true);
+        }
+    });
+   }
+})
+
+//////////////////////// ADD DEPARTMENT modal ////////////////////////
+
+$('#addDepartment').on('click', function() {
+    $('#departmentIDInput').val('');
+    $('#newDepartmentInput').val('');
+    $('#locationSelect').val('');
+    $('#departmentDetailsAction').html('Department Details');
+    $('#submitDepartment').html('Add new department');
+    $('#departmentAlert').addClass('d-none');
+});
+
+
 $('#submitDepartment').on('click', function() {
     $.ajax({
         method:'POST',
@@ -223,35 +265,19 @@ $('#submitDepartment').on('click', function() {
 
     });
 })
-    
-$(document).on('click', '.editDepartment', function() {
-    $('#departmentDetailsAction').html('Edit Department Details');
-    $('#submitDepartment').html('Update');
-    $('#departmentAlert').addClass('d-none');
 
-    const department = JSON.parse($(this).closest('tr').attr('data-location-record'));
-    if(department){
-    $('#departmentIDInput').val(department.id);
-    $('#newDepartmentInput').val(department.name);
-    // Set department's location:
-    $('#locationSelect > option').each(function(i, elem) {
-        if ($(elem).val() === department.locationID) {
-            $(elem).attr('selected', true);
-        }
-    });
-   }
-})
+//////////////////////// DELETE DEPARTMENT modal //////////////////////
 
-$('#addDepartment').on('click', function() {
-    $('#departmentIDInput').val('');
-    $('#newDepartmentInput').val('');
-    $('#locationSelect').val('');
-    $('#departmentDetailsAction').html('Department Details');
-    $('#submitDepartment').html('Add new department');
-    $('#departmentAlert').addClass('d-none');
-});
 
-// --------------------------------------------LOCATIONS section---------------------------------------------------//
+
+
+
+
+
+
+
+// ----------------------------------------------------------LOCATIONS section-------------------------------------------------------------//
+
 getAllLocations();
 
 function getAllLocations(){
@@ -297,6 +323,8 @@ function populateLocationsDropdown(data) {
 
 }
 
+//////////////////////// EDIT LOCATION modal //////////////////////
+
 $(document).on('click', '.editLocation', function(){
     $('#locationDetailsAction').html('Edit Location Details');
     $('#submitLocation').html('Update');
@@ -308,6 +336,8 @@ const city = JSON.parse($(this).closest('tr').attr('data-city'));
         $('#locationIDInput').val(city.id);
     }
 })
+
+//////////////////////// ADD LOCATION modal //////////////////////
 
 $('#addLocation').on('click', function(){
     $('#locationInput').val('');
@@ -336,9 +366,12 @@ $('#submitLocation').on('click', function() {
 
     });
 })
+//////////////////////// DELETE LOCATION modal //////////////////////
 
 
-// -----------------------------------------FORM VALIDATION section------------------------------------------//
+
+
+// ---------------------------------------------------------FORM VALIDATION section----------------------------------------------------------//
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   function runMe(){
