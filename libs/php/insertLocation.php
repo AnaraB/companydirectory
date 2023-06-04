@@ -37,17 +37,17 @@
 	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
 	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	if (isset($_POST['department_id']) && !empty($_POST['department_id'])){
-		$query = $conn->prepare('UPDATE department SET name = ?, locationID = ? WHERE id = ?');
-		$query->bind_param("sii", $_POST['name'],$_POST['locationID'],$_POST['department_id']);
-		$message = 'Department details successfully updated.';
+	if (isset($_POST['location_id']) && !empty($_POST['location_id'])){
+		$query = $conn->prepare('UPDATE location SET name = ? WHERE id = ?');
+		$query->bind_param("si", $_POST['name'], $_POST['location_id']);
+		$message = 'Location details successfully updated.';
 		
 	} else {
-		$query = $conn->prepare('INSERT INTO department (name, locationID) VALUES(?,?)');
+		$query = $conn->prepare('INSERT INTO location (name) VALUE(?)');
 
-		$query->bind_param("si", $_POST['name'], $_POST['locationID']);
+		$query->bind_param("s", $_POST['name']);
 
-		$message = 'New department successfully added.';
+		$message = 'New location successfully added.';
 
 	}
 
@@ -82,4 +82,3 @@
 	echo json_encode($output); 
 
 ?>
-

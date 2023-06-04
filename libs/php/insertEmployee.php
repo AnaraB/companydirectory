@@ -32,45 +32,50 @@
 
 		exit;
 
-	}	
-
-    if (isset($_POST['submit'])){
-        if(!empty($_POST['fName']) && !empty($_POST['lName'])) {
-            $fName = $_POST['fName'];
-            $lName = $_POST['lName'];
-            $email = $_POST['email'];
-            $query = $conn->prepare('INSERT INTO personnel (firsName, lastName, email) VALUES(?,?,?)');
-
-            $query->bind_param("si", $_POST['name'], $_POST['locationID']);
-
-	        $query->execute();
-	
-        if (false === $query) {
-
-            $output['status']['code'] = "400";
-            $output['status']['name'] = "executed";
-            $output['status']['description'] = "query failed";	
-            $output['data'] = [];
-
-            mysqli_close($conn);
-
-            echo json_encode($output); 
-
-            exit;
-
-        }
-            
-        }
-    }
+	}
 
 
+  if (isset($_POST['employee_id']) && !empty($_POST['employee_id'])) {
+    $query = $conn->prepare('UPDATE personnel SET firstName = ?, lastName = ?, jobTitle = ?, email = ?, departmentID = ? WHERE id = ?');
+
+    $query->bind_param('ssssii', $_POST['first_name'], $_POST['last_name'], $_POST['job_title'], $_POST['email'], $_POST['department'], $_POST['employee_id']);
+
+    $message = 'Employee details successfully updated.';
+
+  } else {
+    $query = $conn->prepare('INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) VALUES(?,?,?,?,?)');
+
+    $query->bind_param('ssssi', $_POST['first_name'], $_POST['last_name'], $_POST['job_title'], $_POST['email'], $_POST['department']);
+
+    $message = 'New employee successfully added.';
+  }
+
+  $query->execute();
+
+  if (false === $query) {
+
+    $output['status']['code'] = "400";
+    $output['status']['name'] = "executed";
+    $output['status']['description'] = "query failed";
+    $output['data'] = [];
+
+    mysqli_close($conn);
+
+    echo json_encode($output);
+
+    exit;
+
+  }
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
 	$output['status']['description'] = "success";
 	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-	$output['data'] = [];
+	$output['data'] = ['message' => $message];
 	
 	mysqli_close($conn);
 
 	echo json_encode($output); 
+
+?>
+

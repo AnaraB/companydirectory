@@ -33,14 +33,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-          <span class="navbar-nav mx-3 mb-lg-0" role="navigation">             
-            <select class="btn btn-success dropdown-toggle" name="locationInput" id="selectLocation">
+          <span class="navbar-nav me-2 mb-2 mb-lg-0" role="navigation">   
+            <!---selectLocation in navigation used for search-->          
+            <select class="btn btn-success dropdown-toggle selectLocation" name="locationInput" id="selectLocation">
                 <option value="">Location</option>
               </select>  
           </span>
           
           <span class="navbar-nav me-auto mb-2 mb-lg-0" role="navigation">             
-            <select class="btn btn-success dropdown-toggle selectDepartment" name="departmentInput">
+            <select class="btn btn-success dropdown-toggle selectDepartment" name="departmentInput" id="selectDepartment">
                 <option value="">Department</option>
               </select>  
             </span>
@@ -54,7 +55,7 @@
               aria-label="Search"
               id="search"
             />
-            <button class="btn btn-sm btn-success" name="searchButton" type="submit">
+            <button class="btn btn-sm btn-success" id="searchSubmit" name="searchButton" type="button">
             <!-- Search Icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
               <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -62,7 +63,7 @@
             </button>
           </form>
           
-         <!-- dropdown to add employee, departmemt or location-->
+<!------------------------ADD dropdown to add employee/departmemt/location------------------>
 
           <div class="dropdown">
             <button class="btn btn-warning dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,7 +88,7 @@
                 <button type="button"
                 class="btn btn-link text-success"
                 data-bs-toggle="modal"
-                data-bs-target="#addDepartment"
+                data-bs-target="#departmentDetails"
                 id="addDepartment"
                 >Department
               </button>
@@ -96,7 +97,7 @@
                 <button type="button"
                 class="btn btn-link text-success"
                 data-bs-toggle="modal"
-                data-bs-target="#addLocation"
+                data-bs-target="#locationDetails"
                 id="addLocation"
                 >Location
                 </button>
@@ -105,41 +106,52 @@
           </div>
           
 
-           <!-- Add department modal -->
-           <div class="modal fade" id="addDepartment" tabindex="-1" area-labelledby="addDepartment-label">
+           <!-- ADD NEW/EDIT DEPARTMENT modal -->
+
+           <div class="modal fade" id="departmentDetails" tabindex="-1" area-labelledby="addDepartment-label">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
-                <div class="modal-header text-bg-dark">
-                  <h5 class="modal-title">Add New Department</h5>
-                  <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
+                <div class="modal-header text-bg-dark justify-content-center">
+                  <h5 class="modal-title" id="departmentDetailsAction">Add New Department</h5>
                 </div>
                 <div class="modal-body">
                   <form name="newDepartmentForm">
                     <div class="container">
+                      <input type="hidden" id="departmentIDInput">
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col">
+                          <div class="alert alert-warning d-none" role="alert" id="departmentAlert"></div>
+                        </div>
+                        <div class="col-md-12">
                              <div class="mb-3">
                              <input
                              type="text"
                              class="form-control form-control-sm"
                              placeholder="Department Name"
                              aria-describedby="DepartmentNameHelp"
+                             id="newDepartmentInput"
                              required
                            />
                              </div>
                         </div>
-                        
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                          <select
+                            class="dropdown-toggle form-control form-control-sm selectLocation"
+                            name="locationInput"
+                            id="locationSelect"  
+                          >        <!-- in modal - locationSelect used for sending data to insertDepartment.php -->
+                            <option value="">Select Location</option>
+                          </select> 
+                        </div>
+                      </div>
                        <div class="col-md-10">
                          <div class="d-grid"> 
                            <button
                                type="button"
-                               class="btn btn-sm btn-success">
-                            Add Department
+                               class="btn btn-sm btn-success"
+                               id="submitDepartment">
+                            Add department
                            </button>
                          </div>
                        </div>
@@ -163,30 +175,30 @@
           </div>  
            <!-- end of modal  -->
 
-            <!-- Add location modal -->
-            <div class="modal fade" id="addLocation" tabindex="-1" area-labelledby="addLocation-label">
+            <!-- ADD NEW/EDIT LOCATION modal -->
+
+            <div class="modal fade" id="locationDetails" tabindex="-1" area-labelledby="addLocation-label">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
-                  <div class="modal-header text-bg-dark">
-                    <h5 class="modal-title">Add New Location</h5>
-                    <button
-                      type="button"
-                      class="btn-close btn-close-white"
-                      data-bs-dismiss="modal"
-                      aria-label="Close"
-                    ></button>
+                  <div class="modal-header text-bg-dark justify-content-center">
+                    <h5 class="modal-title" id="locationDetailsAction">Add New Location</h5>
                   </div>
                   <div class="modal-body">
                     <form name="newDepatmentFrom">
                       <div class="container">
+                        <input type="hidden" id="locationIDInput">
                         <div class="row">
-                          <div class="col-md-6">
+                          <div class="col">
+                            <div class="alert alert-warning d-none" role="alert" id="locationAlert"></div>
+                          </div>
+                          <div class="col-md-12">
                                <div class="mb-3">
                                <input
                                type="text"
                                class="form-control form-control-sm"
                                placeholder="Location Name"
                                aria-describedby="LocationNameHelp"
+                               id="locationInput"
                                required
                              />
                                </div>
@@ -196,7 +208,8 @@
                            <div class="d-grid"> 
                              <button
                                  type="button"
-                                 class="btn btn-sm btn-success">
+                                 class="btn btn-sm btn-success"
+                                 id="submitLocation">
                               Add Location
                              </button>
                            </div>
@@ -229,6 +242,7 @@
       <!-- Table navigation tabs -->
  
     <div class="container">
+ 
       <div class="row">
         <div class="col">
           <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -339,25 +353,33 @@
 
           
 
-   <!-- modal to view detail  -->
+   <!-- view DETAILS MODAL  -->
+
    <div class="modal fade" tabindex="-1" id="view" area-labelledby="addEmployee-label">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header text-bg-secondary">
+        <div class="modal-header text-bg-dark justify-content-center">
           <h5 class="modal-title">Employee details</h5>
-          <button
-            type="button"
-            class="btn-close btn-close-white"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-          ></button>
         </div>
-        <div class="modal-body p-0">
-          <ul class="list-group list-unstyled">
-            <li class="list-group-item d-flex justify-content-between align-items-center" id="employeeName"></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center" id="email"></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center" id="department"></li>
-            <li class="list-group-item d-flex justify-content-between align-items-center" id="location"></li>
+        <div class="modal-body">
+
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="fw-bolder d-inline-block w-50">Name</span><span id="employeeName"></span>
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bolder d-inline-block w-50">Email</span><span id="email"></span>
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bolder d-inline-block w-50">Job Title</span><span id="jobTitle"></span>
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bolder d-inline-block w-50">Department</span><span id="department"></span>
+            </li>
+            <li class="list-group-item">
+              <span class="fw-bolder d-inline-block w-50">Location</span><span id="location"></span>
+            </li>
+            
           </ul>
 
         <div class="modal-footer">
@@ -379,24 +401,24 @@
   <!-- end of view employee details modal -->
    
 
-    <!-- modal to edit  -->
+    <!-- EDIT/ADD employee details modal-->
+
     <div class="modal fade" id="employeeDetails" tabindex="-1" area-labelledby="editEmployee-label">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header text-bg-dark">
+          <div class="modal-header text-bg-dark justify-content-center">
             <h5 class="modal-title" id="employeeDetailsAction"></h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
           </div>
           <div class="modal-body">
-            <form name="employeeFrom" class="validated-form" onsubmit="runMe(); return false" novalidate>
+            <div class="row">
+              <div class="col">
+                <div class="alert alert-warning d-none" role="alert" id="employeeAlert"></div>
+              </div>
+            </div>
+            <form name="employeeFrom" class="validated-form">
               <div class="container">
                 <div class="row">
-
+                  <input type="hidden" id="employeeIDInput">
                   <div class="col-md-6">
                        <div class="mb-3">
                        <input
@@ -434,13 +456,26 @@
                    </div>
                  </div>
                  <div class="col-md-6">
+                  <div class="mb-3">
+                  <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Job Title"
+                  aria-describedby="jobTitleHelp"
+                  id="jobTitleInput"
+                  required
+                />
+                  </div>
+                </div>
+                 <div class="col-md-12">
                    <div class="mb-3">
                     <select
                         class="dropdown-toggle form-control form-control-sm selectDepartment"
                         name="departmentInput"
                         id="departmentSelect"
+                   
                     >
-                      <option>Select Department</option>
+                      <option value="">Select Department</option>
                     </select>  
                    </div>
                  </div>
@@ -449,7 +484,7 @@
                      <button
                          type="button"
                          class="btn btn-sm btn-success"
-                         id="changeToAdd">
+                         id="submitEmployeeDetails">
                       Edit Employee
                      </button>
                    </div>
@@ -474,7 +509,7 @@
     </div>  
     <!-- end of edit modal -->
 
-    <!-- modal to delete -->
+    <!-- DELETE MODAL  -->
     <div class="modal" id="deleteEmployee" tabindex="-1">
         <div class="modal-dialog  modal-dialog-centered">
           <div class="modal-content">
@@ -507,6 +542,11 @@
     <script src="libs/js/script.js"></script>
   </body>
 </html>
+
+
+
+
+
 
 
 

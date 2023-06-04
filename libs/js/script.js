@@ -1,18 +1,18 @@
 'use strict';
 
-$('#search').on('keyup', function (){
-    const searchValue = $(this).val();
-
+$('#searchSubmit').on('click', function (){
+    
     $.ajax({
         method: 'POST',
         url: 'libs/php/search.php',
         data: {
             department: $('#selectDepartment').val(),
             location: $('#selectLocation').val(),
-            search_value: searchValue
+            search_value: $('#search').val()
         },
         success: function(result){
             console.log(result);
+            populateEmployeesTab(result.data.personnel);
 
         },
         error: function(error) {
@@ -21,29 +21,35 @@ $('#search').on('keyup', function (){
     })
 })
 
+// ------------------------------------------------ PERSONNEL section-------------------------------------------//
+getAll();
 
+function getAll() {
+    $.ajax({
+        method: 'GET',
+        url: 'libs/php/getAll.php',
+        success: function(result) {
+            const data = result.data;
+       
+            populateEmployeesTab(data);
+        
+        },
+        error: function(error) {
+            console.error(error);
+        }
+      
+    });
 
-$.ajax({
-    method: 'GET',
-    url: 'libs/php/getAll.php',
-    success: function(result) {
-        const data = result.data;
-   
-        populateEmployeesTab(data);
-   
-   
-        //const employeesNumber = data.length;
-    
-    },
-    error: function(error) {
-        console.error(error);
-    }
-  
-});
+}
+
 
 function populateEmployeesTab(data) {
+    console.log(data);
+    const $employeesList =  $('#employeesList');
+    $employeesList.empty();
+
     data.forEach(function(val, i, arr) {
-        $('#employeesList').append(`
+        $employeesList.append(`
         <tr data-employee-record='${JSON.stringify(val)}'>
             <td>${++i}</td>
             <td>${val.firstName}</td>
@@ -70,32 +76,108 @@ $(document).on('click', '.viewEmployeeDetails', function() {
     if (employee) {
       $('#employeeName').html(employeeName);
       $('#email').html(employee.email);
+      $('#jobTitle').html(employee.jobTitle);
       $('#department').html(employee.department);
       $('#location').html(employee.location);
  
     }
 })
 
+$('#submitEmployeeDetails').on('click', function (){
+    $.ajax({
+        method:'POST',
+        url:'libs/php/insertEmployee.php',
+        data: {
+            employee_id: $('#employeeIDInput').val(),
+            first_name: $('#firstNameInput').val(),
+            last_name: $('#lastNameInput').val(),
+            email: $('#emailInput').val(),
+            job_title: $('#jobTitleInput').val(),
+            department: $('#departmentSelect').val()
+        },
+        success: function(result){
+            console.log('insert', result);
+            $('#employeeAlert').text(result.data.message).removeClass('d-none');
+            getAll();
+            
+        },
+        error: function(error){
+            console.error(error);
+        }
 
+    });
 
-$.ajax({
-    method: 'GET',
-    url: 'libs/php/getAllDepartments.php',
-    success: function(result) {
-        const data = result.data;
-        populateDepartmentsDropdown(data); 
-        populateDepartmentsTab(data); 
-      
-          
-    },
-    error: function(error) {
-        console.error(error);
-    }
-  
 });
 
-function populateDepartmentsDropdown(data) {
+// populating addEmployee modal
 
+$('#addEmployee').on('click', function() {
+    $('#employeeIDInput').val('');
+    $('#firstNameInput').val('');
+    $('#lastNameInput').val('');
+    $('#emailInput').val('');
+    $('#jobTitleInput').val('');
+    $('#departmentSelect').val('');
+    $('#employeeDetailsAction').html('Add Employee Details');
+    $('#submitEmployeeDetails').html('Add new employee');
+    $('#employeeAlert').addClass('d-none');
+});
+
+
+// Event binding on dynamically created elements:
+$(document).on('click', '.editEmployee', function() {
+    $('#employeeDetailsAction').html('Edit Employee Details');
+    $('#submitEmployeeDetails').html('Update information');
+    $('#employeeAlert').addClass('d-none');
+    const employeeDetails = JSON.parse($(this).closest('tr').attr('data-employee-record'));
+    if (employeeDetails) {
+      $('#employeeIDInput').val(employeeDetails.id);
+      $('#firstNameInput').val(employeeDetails.firstName);
+      $('#lastNameInput').val(employeeDetails.lastName);
+      $('#emailInput').val(employeeDetails.email);
+      $('#jobTitleInput').val(employeeDetails.jobTitle);
+      // Set employee's department:
+      $('#departmentSelect > option').each(function(i, elem) {
+          if ($(elem).text() === employeeDetails.department) {
+              $(elem).attr('selected', true);
+          }
+      });
+        // Set employee's location:
+        $('#locationSelect > option').each(function(i, elem) {
+        if ($(elem).text() === employeeDetails.location) {
+            $(elem).attr('selected', true);
+        }
+    });
+    }
+});
+
+
+
+//---------------------------------------- DEPARTMENTS section-----------------------------------------------------//
+getAllDepartments();
+
+function getAllDepartments() {
+
+    $.ajax({
+        method: 'GET',
+        url: 'libs/php/getAllDepartments.php',
+        success: function(result) {
+            const data = result.data;
+            populateDepartmentsDropdown(data); 
+            populateDepartmentsTab(data); 
+            
+        
+            
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    
+    });
+}
+
+function populateDepartmentsDropdown(data) {
+    
     data.forEach(function (val, i, arr) {
         $('.selectDepartment').append($('<option>', {
         value: val.id,
@@ -106,44 +188,97 @@ function populateDepartmentsDropdown(data) {
 }
      
 function populateDepartmentsTab(data) {
+    console.log(data);
     data.forEach(function(val, i, arr) {
         $('#departmentsList').append(`
-        <tr>
+        <tr data-location-record='${JSON.stringify(val)}'>
             <td>${val.name}</td>
-            <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editEmployee">edit</button></td>
-            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployee">delete</button></td>
+            <td><button class="btn btn-warning editDepartment" data-bs-toggle="modal" data-bs-target="#departmentDetails">edit</button></td>
+            <td><button class="btn btn-danger deleteDepartment" data-bs-toggle="modal" data-bs-target="#deleteDepartment">delete</button></td>
         </tr>       
     `);
     })
     
 }
-    
-    
+ 
 
+$('#submitDepartment').on('click', function() {
+    $.ajax({
+        method:'POST',
+        url:'libs/php/insertDepartment.php',
+        data: {
+            department_id: $('#departmentIDInput').val(),
+            locationID: $('#locationSelect').val(),
+            name: $('#newDepartmentInput').val()
+        },
+        success: function(result){
+            console.log('insert', result);
+            $('#departmentAlert').text(result.data.message).removeClass('d-none');
+            getAllDepartments();
+            
+        },
+        error: function(error){
+            console.error(error);
+        }
 
-$.ajax({
-    method: 'GET',
-    url: 'libs/php/getAllLocations.php',
-    success: function(result) {
-        const data = result.data;
-        populateLocationsTab(data); 
-        populateLocationsDropdown(data);
-     
-          
-    },
-    error: function(error) {
-        console.error(error);
-    }
-  
+    });
+})
+    
+$(document).on('click', '.editDepartment', function() {
+    $('#departmentDetailsAction').html('Edit Department Details');
+    $('#submitDepartment').html('Update');
+    $('#departmentAlert').addClass('d-none');
+
+    const department = JSON.parse($(this).closest('tr').attr('data-location-record'));
+    if(department){
+    $('#departmentIDInput').val(department.id);
+    $('#newDepartmentInput').val(department.name);
+    // Set department's location:
+    $('#locationSelect > option').each(function(i, elem) {
+        if ($(elem).val() === department.locationID) {
+            $(elem).attr('selected', true);
+        }
+    });
+   }
+})
+
+$('#addDepartment').on('click', function() {
+    $('#departmentIDInput').val('');
+    $('#newDepartmentInput').val('');
+    $('#locationSelect').val('');
+    $('#departmentDetailsAction').html('Department Details');
+    $('#submitDepartment').html('Add new department');
+    $('#departmentAlert').addClass('d-none');
 });
+
+// --------------------------------------------LOCATIONS section---------------------------------------------------//
+getAllLocations();
+
+function getAllLocations(){
+    $.ajax({
+        method: 'GET',
+        url: 'libs/php/getAllLocations.php',
+        success: function(result) {
+            const data = result.data;
+            populateLocationsTab(data); 
+            populateLocationsDropdown(data);
+        
+            
+        },
+        error: function(error) {
+            console.error(error);
+        }
+    
+    });
+}
 
 function populateLocationsTab(data) {
     data.forEach(function(val, i, arr) {
         $('#locationsList').append(`
-        <tr>
+        <tr data-city='${JSON.stringify(val)}'>
             <td>${val.name}</td>
-            <td><button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editEmployee">edit</button></td>
-            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployee">delete</button></td>
+            <td><button class="btn btn-warning editLocation" data-bs-toggle="modal" data-bs-target="#locationDetails">edit</button></td>
+            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteLocation">delete</button></td>
         </tr> 
     `);
 
@@ -154,7 +289,7 @@ function populateLocationsTab(data) {
 function populateLocationsDropdown(data) {
 
     data.forEach(function (val, i, arr) {
-        $('#selectLocation').append($('<option>', {
+        $('.selectLocation').append($('<option>', {
         value: val.id,
         text: val.name
         }));
@@ -162,8 +297,48 @@ function populateLocationsDropdown(data) {
 
 }
 
+$(document).on('click', '.editLocation', function(){
+    $('#locationDetailsAction').html('Edit Location Details');
+    $('#submitLocation').html('Update');
+    $('#locationAlert').addClass('d-none');
 
-// Form validation
+const city = JSON.parse($(this).closest('tr').attr('data-city'));
+    if (city){
+        $('#locationInput').val(city.name);
+        $('#locationIDInput').val(city.id);
+    }
+})
+
+$('#addLocation').on('click', function(){
+    $('#locationInput').val('');
+    $('#locationDetailsAction').html('Location Details');
+    $('#submitLocation').html('Add new location');
+    $('#locationAlert').addClass('d-none');
+})
+
+$('#submitLocation').on('click', function() {
+    $.ajax({
+        method:'POST',
+        url:'libs/php/insertLocation.php',
+        data: {
+            location_id: $('#locationIDInput').val(),
+            name: $('#locationInput').val()
+        },
+        success: function(result){
+            console.log('insert', result);
+            $('#locationAlert').text(result.data.message).removeClass('d-none');
+            getAllLocations();
+            
+        },
+        error: function(error){
+            console.error(error);
+        }
+
+    });
+})
+
+
+// -----------------------------------------FORM VALIDATION section------------------------------------------//
 
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
   function runMe(){
@@ -186,39 +361,8 @@ function populateLocationsDropdown(data) {
     
 
 
-$('#addEmployee').on('click', function() {
-   $('#addEmployee').empty();
-    $('#employeeDetailsAction').html('Add Employee Details');
-    $('#changeToAdd').html('Add new employee');
-});
-
-
-// Event binding on dynamically created elements:
-$(document).on('click', '.editEmployee', function() {
-    $('#employeeDetailsAction').html('Edit Employee Details');
-    const employeeDetails = JSON.parse($(this).closest('tr').attr('data-employee-record'));
-    if (employeeDetails) {
-      $('#firstNameInput').val(employeeDetails.firstName);
-      $('#lastNameInput').val(employeeDetails.lastName);
-      $('#emailInput').val(employeeDetails.email);
-      // Set employee's department:
-      $('#departmentSelect > option').each(function(i, elem) {
-          if ($(elem).text() === employeeDetails.department) {
-              $(elem).attr('selected', true);
-          }
-      });
-    }
-});
 
 
 
-// $('button.delete').on('click', function(e) {
-//     e.preventDefault();
-//     if(confirm()){
-//       var frm = $("<form>");
-//       frm.attr('method', 'post');
-//       frm.attr('action', $(this).attr('href'));
-//       frm.appendTo('body');
-//       frm.submit();
-//     }
-// });
+
+
