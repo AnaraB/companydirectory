@@ -514,21 +514,22 @@
     </div>  
     <!-- end of edit modal -->
 
-    <!-- DELETE MODAL  -->
-    <div class="modal" id="deleteEmployee" tabindex="-1">
+    <!---------- DELETE employee/department/location MODAL  ------------>
+
+    <div class="modal" id="deleteInfo" tabindex="-1">
         <div class="modal-dialog  modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-body text-center d-flex justifu-content-between align-items-center">
               <h4 class="fw-light m-0">Are you sure you want to delete this information?</h4>
             </div>
             <div class="modal-footer d-flex justifu-content-center">
-              <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes</button>
-              <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close">No, go back</button>
+              <button type="submit" class="btn btn-danger" data-bs-dismiss="modal" id="confirmToDelete">Yes</button>
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal" aria-label="Close" id="">No, go back</button>
             </div>
           </div>
         </div>
     </div>
-    <!-- end of delete modal -->
+    <!-- end of delete employee modal -->
 
 
     <script src="libs/js/jquery-3.7.0.min.js"></script>

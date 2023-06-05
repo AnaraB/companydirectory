@@ -58,7 +58,7 @@ function populateEmployeesTab(data) {
             <td>${val.lastName}</td>
             <td><button class="btn btn-sm btn-primary viewEmployeeDetails" data-bs-toggle="modal" data-bs-target="#view">Details</button></td>
             <td><button class="btn btn-sm btn-warning editEmployee" data-bs-toggle="modal" data-bs-target="#employeeDetails">Edit</button></td>
-            <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteEmployee">Delete</button></td>
+            <td><button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInfo">Delete</button></td>
         
         </tr>
          
@@ -202,7 +202,7 @@ function populateDepartmentsTab(data) {
         <tr data-location-record='${JSON.stringify(val)}'>
             <td>${val.name}</td>
             <td><button class="btn btn-warning editDepartment" data-bs-toggle="modal" data-bs-target="#departmentDetails">edit</button></td>
-            <td><button class="btn btn-danger deleteDepartment" data-bs-toggle="modal" data-bs-target="#deleteDepartment">delete</button></td>
+            <td><button class="btn btn-danger deleteDepartment" data-bs-toggle="modal" data-bs-target="#deleteInfo">delete</button></td>
         </tr>       
     `);
     })
@@ -268,7 +268,22 @@ $('#submitDepartment').on('click', function() {
 
 //////////////////////// DELETE DEPARTMENT modal //////////////////////
 
+$('#confirmToDelete').on('click', function() {
+    $.ajax({
+        method: 'POST',
+        url: 'libs/php/deleteDepartmentByID.php',
+        data: {
+            department_id:$('#departmentIDInput').val()
+        },
+        success: function(result){
+            console.log('delete', result);
+        },
+        error: function(error){
+            console.error(error);
+        }
+    })
 
+})
 
 
 
@@ -304,7 +319,7 @@ function populateLocationsTab(data) {
         <tr data-city='${JSON.stringify(val)}'>
             <td>${val.name}</td>
             <td><button class="btn btn-warning editLocation" data-bs-toggle="modal" data-bs-target="#locationDetails">edit</button></td>
-            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteLocation">delete</button></td>
+            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteInfo">delete</button></td>
         </tr> 
     `);
 
