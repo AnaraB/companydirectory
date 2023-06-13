@@ -70,10 +70,10 @@
 <!------------------------ADD dropdown to add employee/departmemt/location------------------>
 
   <div class="dropdown">
-    <button class="btn btn-danger text-white dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <button class="btn btn-danger dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
       <!-- ADD ICON -->
       <!-- <i class="fa-solid fa-plus"></i> -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
       </svg> 
   
@@ -141,16 +141,19 @@
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="lastName" placeholder="Last name" required>
                   <label for="lastName">Last name</label>
+                  <div class="help-block with-errors"></div>
                 </div>
       
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="jobTitle" placeholder="Job title" required>
                   <label for="jobTitle">Job Title</label>
+                  <div class="help-block with-errors"></div>
                 </div>          
       
                 <div class="form-floating mb-3">
                   <input type="email" class="form-control" id="emailAddress" placeholder="Email address" required>
                   <label for="emailAddress">Email Address</label>
+                  <div class="help-block with-errors"></div>
                 </div>    
       
                 <div class="form-floating">
@@ -198,6 +201,7 @@
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="newFepartmentInput" placeholder="Department name" required>
                   <label for="departmentName">Department name</label>
+                  <div class="help-block with-errors"></div>
                 </div>
 
                 <div class="form-floating">
@@ -234,7 +238,7 @@
                 <h5 class="modal-title" id="locationDetailsAction">Add New Location</h5>
               </div>
               <div class="modal-body">
-                <form data-toggle="validator" name="newLocationForm">
+                <form role="form" data-toggle="validator" name="newLocationForm">
                   <div class="col">
                     <div class="alert alert-warning d-none" role="alert" id="locationAlert"></div>
                   </div>
@@ -242,14 +246,9 @@
                   <input type="hidden" id="locationIDInput">
               
                   <div class="form-floating">
-                    <input
-                    type="text"
-                    class="form-control form-control-sm"
-                    placeholder="Location Name"
-                    aria-describedby="LocationNameHelp"
-                    id="locationInput"
-                    required
-                  />
+                    <input type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15" class="form-control"  id="locationInput"  aria-describedby="LocationNameHelp" placeholder="Location name" required>
+                    <label for="locationName">Location name</label>
+                  <div class="help-block with-errors"></div>
                   </div>  
 
                   <div class="modal-footer">
