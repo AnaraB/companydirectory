@@ -6,3 +6,18 @@
     background-clip: text;
     color: transparent;
 }
+
+.container{
+    width: 1000px;
+}
+
+
+.col-sm {
+    width: 30px;
+}
+
+.fixTableHead{
+     position: sticky;
+    top: 0;
+   
+}
