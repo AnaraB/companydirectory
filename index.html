@@ -199,30 +199,33 @@
               <h5 class="modal-title" id="departmentDetailsAction">Add New Department</h5>
             </div>
             <div class="modal-body">
-              <form data-toggle="validator" id="newDepartmentForm">
+              <form data-toggle="validator" role="form" id="newDepartmentForm">
 
                 <input type="hidden" id="departmentIDInput">
 
-                <div class="form-floating mb-3">
+                <div class="form-floating form-group mb-3">
                   <input type="text" class="form-control" id="newDepartmentInput" placeholder="Department name" required>
-                  <label for="departmentName">Department name</label>
+                  <label for="departmentName" class="control-label">Department name</label>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
 
-                <div class="form-floating">
+                <div class="form-floating form-group">
                   <select
                   class="form-select selectLocation"
                   name="locationInput"
                   id="locationSelect" > 
                   </select>    
                   <label for="location">Location</label>
+                  <div class="help-block with-errors"></div>
+                  <span class="glyphicon form-control-feedback"></span>
                 </div>  
 
                 <div class="col my-3">
                   <div class="alert alert-warning d-none" role="alert" id="departmentAlert"></div>
                 </div>
 
-                <div class="modal-footer">
+                <div class="modal-footer form-group">
                   <button type="submit" form="newDepartmentForm" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary"  id="submitDepartment">Add Department</button>
                   <button type="button" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
@@ -250,9 +253,10 @@
                 <form role="form" data-toggle="validator" name="newLocationForm">
                   <input type="hidden" id="locationIDInput">
               
-                  <div class="form-floating">
+                  <div class="form-floating form-group">
                     <input type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15" class="form-control"  id="locationInput"  aria-describedby="LocationNameHelp" placeholder="Location name" required>
                     <label for="locationName">Location name</label>
+                    <span class="glyphicon form-control-feedback"></span>
                   <div class="help-block with-errors"></div>
                   </div> 
                   
@@ -260,7 +264,7 @@
                     <div class="alert alert-warning d-none" role="alert" id="locationAlert"></div>
                   </div>
 
-                  <div class="modal-footer">
+                  <div class="modal-footer form-group">
                     <button type="submit" form="exampleForm" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary"  id="submitLocation">Add Location</button>
                     <button type="button" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                   </div>

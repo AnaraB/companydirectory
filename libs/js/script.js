@@ -100,7 +100,6 @@ $(document).on('click', '.viewEmployeeDetails', function() {
 
 $('#employeeDetails').on('show.bs.modal', function (e) {
     const employeeId = $(e.relatedTarget).attr('data-id');
-
     $.ajax({
       url: "libs/php/getPersonnelByID.php",
       method: 'POST',
@@ -108,8 +107,7 @@ $('#employeeDetails').on('show.bs.modal', function (e) {
       data: {
         id: employeeId // Retrieves the data-id attribute from the calling button
       },
-      success: function (result) {          
-      
+      success: function (result) {    
       if (result.status.code == 200) {
         // Populate departments dropdown first
         $('#department').html('');
@@ -132,6 +130,7 @@ $('#employeeDetails').on('show.bs.modal', function (e) {
             })
                 
         }
+              
         
       } else {
 
@@ -165,6 +164,7 @@ $('#employeeForm').on("submit", function(e) {
             department: $('#department').val()
         },
         success: function(result){
+            console.log('insert', result);
             $('#employeeAlert').text(result.data.message).removeClass('d-none');
             getAll();
             
@@ -216,13 +216,6 @@ $(document).on('click', '.deleteEmployeeInfo', function(){
 
 })
 
-$('#deleteEmployeeModal').on('click', function() {
-   
-    $('#deleteEmployeeMessage').addClass('d-none');
-
-   
-});
-
 $('#confirmToDeleteEmployee').on('click', function() { 
   const employeeId = $(this).attr('data-employee-id');
 
@@ -233,6 +226,8 @@ $('#confirmToDeleteEmployee').on('click', function() {
             id: employeeId
         },
         success: function(result){
+            console.log('delete', result);
+
             $('#deleteEmployeeMessage').text(result.data.message).removeClass('d-none');
         },
         error: function(error){
@@ -343,6 +338,7 @@ $('#newDepartmentForm').on('submit', function(e) {
             name: $('#newDepartmentInput').val()
         },
         success: function(result){
+            console.log('insert', result);
             $('#departmentAlert').text(result.data.message).removeClass('d-none');
             getAllDepartments();
             
@@ -383,7 +379,9 @@ $(document).on('click','.deleteDepartmentInfo', function() {
           } else {
             $('#deleteDepartmentTitle').text('Remove department?');
             $('#deleteDepartmentBodyMesage').html(`Are you sure that you want to remove the entry for <strong>${data.departmentName}</strong>?`);
-            $('#confirmToDeleteDepartment').attr('data-department-id', departmentId);
+            $('#confirmToDeleteDepartment')
+                .removeClass('d-none')
+                .attr('data-department-id', departmentId);
 
             $('#dismissDeleteDepartment').text('NO'); 
             $('#deleteDepartmentMessage').addClass('d-none');
@@ -604,7 +602,6 @@ $(document).on('click','.deleteLocationInfo', function() {
 // ---------------------------------------------------------FORM VALIDATION section----------------------------------------------------------//
 
   
-
 
 
 
