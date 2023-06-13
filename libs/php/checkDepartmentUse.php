@@ -57,15 +57,13 @@
 
 	$result = $query->get_result();
 
-    $data = mysqli_fetch_assoc($result);
+   	$data = [];
 
-   	// $data = [];
+	while ($row = mysqli_fetch_assoc($result)) {
 
-	// while ($row = mysqli_fetch_assoc($result)) {
+		array_push($data, $row);
 
-	// 	array_push($data, $row);
-
-	// }
+	}
 
 	$output['status']['code'] = "200";
 	$output['status']['name'] = "ok";
@@ -78,4 +76,7 @@
 	mysqli_close($conn);
 
 ?>
+
+
+
 

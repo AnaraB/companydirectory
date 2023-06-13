@@ -128,31 +128,34 @@
                 <div class="alert alert-warning d-none" role="alert" id="employeeAlert"></div>
               </div>
                 
-              <form data-toggle="validator" id="employeeForm">
+              <form data-toggle="validator" role="form" id="employeeForm">
       
                 <input type="hidden" id="employeeID">
       
-                <div class="form-floating mb-3">
+                <div class="form-floating form-group mb-3">
                   <input type="text" class="form-control" id="firstName" placeholder="First name" required>
-                  <label for="firstName">First name</label>
+                  <label for="firstName" class="control-label">First name</label>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
       
-                <div class="form-floating mb-3">
+                <div class="form-floating form-group mb-3">
                   <input type="text" class="form-control" id="lastName" placeholder="Last name" required>
-                  <label for="lastName">Last name</label>
+                  <label for="lastName" class="control-label">Last name</label>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>
       
-                <div class="form-floating mb-3">
+                <div class="form-floating form-group mb-3">
                   <input type="text" class="form-control" id="jobTitle" placeholder="Job title" required>
-                  <label for="jobTitle">Job Title</label>
+                  <label for="jobTitle" class="control-label">Job Title</label>
+                  <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
                   <div class="help-block with-errors"></div>
                 </div>          
       
                 <div class="form-floating mb-3">
                   <input type="email" class="form-control" id="emailAddress" placeholder="Email address" required>
-                  <label for="emailAddress">Email Address</label>
+                  <label for="emailAddress" class="control-label">Email Address</label>
                   <div class="help-block with-errors"></div>
                 </div>    
       
@@ -166,7 +169,7 @@
       
             </div>
       
-            <div class="modal-footer">
+            <div class="modal-footer form-group">
               <button type="submit" form="employeeForm" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary">SAVE</button>
               <button type="button" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary" data-bs-dismiss="modal">CANCEL</button>
             </div>
@@ -358,7 +361,6 @@
                 </tr>
               </thead>
               <tbody id="departmentsList">
-                <!-- <td><button><i class="fa-regular fa-user"></i></button></td> -->
               </tbody>
             </table>
             </div>
@@ -453,13 +455,13 @@
      
           Are you sure that you want to remove the entry for <span id="areYouSureEmployeeName" class="fw-bold"></span>?
           <div class="col">
-            <div class="alert alert-warning d-none" role="alert" id="deleteDepartmentMessage"></div>
+            <div class="alert alert-warning d-none" role="alert" id="deleteEmployeeMessage"></div>
           </div>
 
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary" data-bs-dismiss="modal" data-employee-id="" id="confirmToDeleteEmployee">Yes</button>
+        <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary" data-employee-id="" id="confirmToDeleteEmployee">Yes</button>
         <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary" data-bs-dismiss="modal">No</button>
       </div>
  
@@ -484,15 +486,14 @@
         </div>
   
         <div class="modal-body">
-            <div id="deleteDepartmentBodyMesage"></div>
-            
           <div class="col">
             <div class="alert alert-warning d-none" role="alert" id="deleteDepartmentMessage"></div>
           </div>
+            <div id="deleteDepartmentBodyMesage"></div>
         </div>
   
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary d-none" data-bs-dismiss="modal" data-department-id="" id="confirmToDelete">Yes</button>
+          <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary d-none" data-department-id="" id="confirmToDeleteDepartment">Yes</button>
           <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary" data-bs-dismiss="modal" id="dismissDeleteDepartment"></button>
         </div>
         
@@ -520,15 +521,14 @@
         </div>
   
         <div class="modal-body">
-            <div id="deleteLocationBodyMesage"></div>
-            
           <div class="col">
             <div class="alert alert-warning d-none" role="alert" id="deleteLocationMessage"></div>
           </div>
+            <div id="deleteLocationBodyMesage"></div>
         </div>
   
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary d-none" data-bs-dismiss="modal" data-location-id="" id="confirmToDeleteLocation">Yes</button>
+          <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary d-none"  data-location-id="" id="confirmToDeleteLocation">Yes</button>
           <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary" data-bs-dismiss="modal" id="dismissDeleteLocation"></button>
         </div>
         
@@ -549,6 +549,9 @@
 
        <!-- boostrap -->
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- bootsrap validator -->
+    <script src="bootstrap/js/validator.min.js"></script>
 
     <!-- fontawesome icons -->
     <script defer src="fontawesome/js/all.min.js"></script>

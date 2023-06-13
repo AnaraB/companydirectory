@@ -217,6 +217,11 @@ $(document).on('click', '.deleteEmployeeInfo', function(){
 
 })
 
+$('#deleteEmployeeModal').on('click', function() {
+    $('#deleteEmployeeMessage').addClass('d-none');
+   
+});
+
 $('#confirmToDeleteEmployee').on('click', function() { 
   const employeeId = $(this).attr('data-employee-id');
 
@@ -370,7 +375,7 @@ $(document).on('click','.deleteDepartmentInfo', function() {
             const data = result.data[0];
   
           if (data.departmentCount > 0) {
-            $('#confirmToDelete')
+            $('#confirmToDeleteDepartment')
                 .addClass('d-none')
                 .attr('data-department-id', '');
             $('#deleteDepartmentTitle').text('You cannot remove department');
@@ -380,9 +385,7 @@ $(document).on('click','.deleteDepartmentInfo', function() {
           } else {
             $('#deleteDepartmentTitle').text('Remove department?');
             $('#deleteDepartmentBodyMesage').html(`Are you sure that you want to remove the entry for <strong>${data.departmentName}</strong>?`);
-            $('#confirmToDelete')
-                .removeClass('d-none')
-                .attr('data-department-id', departmentId);
+            $('#confirmToDeleteDepartment').attr('data-department-id', departmentId);
 
             $('#dismissDeleteDepartment').text('NO'); 
             $('#deleteDepartmentMessage').addClass('d-none');
