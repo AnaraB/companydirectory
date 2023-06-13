@@ -124,9 +124,6 @@
             </div>
       
             <div class="modal-body">
-              <div class="col">
-                <div class="alert alert-warning d-none" role="alert" id="employeeAlert"></div>
-              </div>
                 
               <form data-toggle="validator" role="form" id="employeeForm">
       
@@ -154,8 +151,9 @@
                 </div>          
       
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="emailAddress" placeholder="Email address" required>
+                  <input type="email" class="form-control" id="emailAddress" placeholder="Email address" data-error="Email address is invalid"required>
                   <label for="emailAddress" class="control-label">Email Address</label>
+                  <span class="glyphicon form-control-feedback" ></span>
                   <div class="help-block with-errors"></div>
                 </div>    
       
@@ -163,10 +161,17 @@
                   <select class="form-select" id="department" placeholder="Department">
                   </select>
                   <label for="department">Department</label>
+                  <span class="glyphicon form-control-feedback" ></span>
                 </div>  
+
+                <div class="col my-3">
+                  <div class="alert alert-warning d-none" role="alert" id="employeeAlert"></div>
+                </div>
       
               </form>
-      
+
+              
+            
             </div>
       
             <div class="modal-footer form-group">
@@ -197,12 +202,9 @@
               <form data-toggle="validator" id="newDepartmentForm">
 
                 <input type="hidden" id="departmentIDInput">
-                <div class="col">
-                  <div class="alert alert-warning d-none" role="alert" id="departmentAlert"></div>
-                </div>
 
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="newFepartmentInput" placeholder="Department name" required>
+                  <input type="text" class="form-control" id="newDepartmentInput" placeholder="Department name" required>
                   <label for="departmentName">Department name</label>
                   <div class="help-block with-errors"></div>
                 </div>
@@ -212,9 +214,13 @@
                   class="form-select selectLocation"
                   name="locationInput"
                   id="locationSelect" > 
-                  </select>      <!-- in modal - locationSelect used for sending data to insertDepartment.php -->
+                  </select>    
                   <label for="location">Location</label>
                 </div>  
+
+                <div class="col my-3">
+                  <div class="alert alert-warning d-none" role="alert" id="departmentAlert"></div>
+                </div>
 
                 <div class="modal-footer">
                   <button type="submit" form="newDepartmentForm" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary"  id="submitDepartment">Add Department</button>
@@ -242,17 +248,17 @@
               </div>
               <div class="modal-body">
                 <form role="form" data-toggle="validator" name="newLocationForm">
-                  <div class="col">
-                    <div class="alert alert-warning d-none" role="alert" id="locationAlert"></div>
-                  </div>
-
                   <input type="hidden" id="locationIDInput">
               
                   <div class="form-floating">
                     <input type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15" class="form-control"  id="locationInput"  aria-describedby="LocationNameHelp" placeholder="Location name" required>
                     <label for="locationName">Location name</label>
                   <div class="help-block with-errors"></div>
-                  </div>  
+                  </div> 
+                  
+                  <div class="col my-3">
+                    <div class="alert alert-warning d-none" role="alert" id="locationAlert"></div>
+                  </div>
 
                   <div class="modal-footer">
                     <button type="submit" form="exampleForm" class="btn btn-outline-secondary btn-sm cd-btn-outline-secondary"  id="submitLocation">Add Location</button>
@@ -452,13 +458,15 @@
       </div>
 
       <div class="modal-body">
+        <div class="col my-3">
+          <div class="alert alert-warning d-none" role="alert" id="deleteEmployeeMessage"></div>
+        </div>
      
-          Are you sure that you want to remove the entry for <span id="areYouSureEmployeeName" class="fw-bold"></span>?
-          <div class="col">
-            <div class="alert alert-warning d-none" role="alert" id="deleteEmployeeMessage"></div>
-          </div>
-
+          <div>Are you sure that you want to remove the entry for <span id="areYouSureEmployeeName" class="fw-bold"></span>?</div>
+          
       </div>
+
+     
 
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary cd-btn-outline-secondary" data-employee-id="" id="confirmToDeleteEmployee">Yes</button>
@@ -486,7 +494,7 @@
         </div>
   
         <div class="modal-body">
-          <div class="col">
+          <div class="col my-3">
             <div class="alert alert-warning d-none" role="alert" id="deleteDepartmentMessage"></div>
           </div>
             <div id="deleteDepartmentBodyMesage"></div>
@@ -521,7 +529,7 @@
         </div>
   
         <div class="modal-body">
-          <div class="col">
+          <div class="col my-3">
             <div class="alert alert-warning d-none" role="alert" id="deleteLocationMessage"></div>
           </div>
             <div id="deleteLocationBodyMesage"></div>

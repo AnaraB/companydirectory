@@ -165,7 +165,6 @@ $('#employeeForm').on("submit", function(e) {
             department: $('#department').val()
         },
         success: function(result){
-            console.log('insert', result);
             $('#employeeAlert').text(result.data.message).removeClass('d-none');
             getAll();
             
@@ -218,7 +217,9 @@ $(document).on('click', '.deleteEmployeeInfo', function(){
 })
 
 $('#deleteEmployeeModal').on('click', function() {
+   
     $('#deleteEmployeeMessage').addClass('d-none');
+
    
 });
 
@@ -232,8 +233,6 @@ $('#confirmToDeleteEmployee').on('click', function() {
             id: employeeId
         },
         success: function(result){
-            console.log('delete', result);
-
             $('#deleteEmployeeMessage').text(result.data.message).removeClass('d-none');
         },
         error: function(error){
@@ -283,7 +282,7 @@ function populateDepartmentsDropdown(data, selector) {
 function populateDepartmentsTab(data) {
     data.forEach(function(val, i, arr) {
         $('#departmentsList').append(`
-        <tr data-id=${val.id} data-location-record='${JSON.stringify(val)}'>
+        <tr data-department-id=${val.id} data-location-record='${JSON.stringify(val)}'>
             <td>${val.name}</td>
             <td><button class="btn btn-sm btn-warning text-white editDepartment" data-bs-toggle="modal" data-bs-target="#departmentDetails"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
@@ -332,7 +331,7 @@ $('#addDepartment').on('click', function() {
 
 
 
-$('#submitDepartment').on('submit', function(e) {
+$('#newDepartmentForm').on('submit', function(e) {
     e.preventDefault();
 
     $.ajax({
@@ -344,7 +343,6 @@ $('#submitDepartment').on('submit', function(e) {
             name: $('#newDepartmentInput').val()
         },
         success: function(result){
-            console.log('insert', result);
             $('#departmentAlert').text(result.data.message).removeClass('d-none');
             getAllDepartments();
             
@@ -360,7 +358,7 @@ $('#submitDepartment').on('submit', function(e) {
 
 
 $(document).on('click','.deleteDepartmentInfo', function() {
-    const departmentId = $(this).closest('tr').attr('data-id');
+    const departmentId = $(this).closest('tr').attr('data-department-id');
    
     $.ajax({
       url: "libs/php/checkDepartmentUse.php",
