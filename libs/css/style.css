@@ -17,17 +17,46 @@
 }
 
 .fixTableHead{
-     position: sticky;
+    position: sticky;
     top: 0;
+ 
    
 }
 
-@media only screen and (max-width: 600px) {
-    .container-fluid {
-      width: auto;
+@media only screen and (max-width: 62em) {
+    
+     .navbar-nav{
+      padding: 0.5em;
+      width: 12em;
+     
     }
+
+    .d-flex{
+        padding: .5em;
+        width: 12em;
+      }
+
+    .dropdown{
+    padding: 0.5em;
+
+    } 
+
+      
+    
+  }
+
+  @media only screen and (max-width: 37em) {
+ 
+
     .container{
-        width: 800px;
+        width: 500px;
+    }
+
+    .navbar{
+        width: 100%;
     }
     
+    
+
+   
   }

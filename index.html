@@ -24,6 +24,7 @@
         <div class="navbar-brand">
           <span class="brand-gradient">Company Directory</span>
         </div>
+       
         <button
           class="navbar-toggler"
           type="button"
@@ -69,45 +70,48 @@
           
 <!------------------------ADD dropdown to add employee/departmemt/location------------------>
 
-  <div class="dropdown">
-    <button class="btn btn-danger dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <!-- ADD ICON -->
-      <!-- <i class="fa-solid fa-plus"></i> -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
-        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
-      </svg> 
-  
-    </button>
-    <ul class="dropdown-menu">
-      <li>
-        <button
-            type="button"
+      <div class="dropdown">
+        <button class="btn btn-danger dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <!-- ADD ICON -->
+          <!-- <i class="fa-solid fa-plus"></i> -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+          </svg> 
+      
+        </button>
+        <ul class="dropdown-menu">
+          <li>
+            <button
+                type="button"
+                class="btn btn-link text-success"
+                data-bs-toggle="modal"
+                data-bs-target="#employeeDetails"
+                id="addEmployee"
+            >Employee</button>
+          </li>
+          <li>
+            <button type="button"
             class="btn btn-link text-success"
             data-bs-toggle="modal"
-            data-bs-target="#employeeDetails"
-            id="addEmployee"
-        >Employee</button>
-      </li>
-      <li>
-        <button type="button"
-        class="btn btn-link text-success"
-        data-bs-toggle="modal"
-        data-bs-target="#departmentDetails"
-        id="addDepartment"
-        >Department
-      </button>
-      </li>
-      <li>
-        <button type="button"
-        class="btn btn-link text-success"
-        data-bs-toggle="modal"
-        data-bs-target="#locationDetails"
-        id="addLocation"
-        >Location
-        </button>
-    </li>
-    </ul>
+            data-bs-target="#departmentDetails"
+            id="addDepartment"
+            >Department
+          </button>
+          </li>
+          <li>
+            <button type="button"
+            class="btn btn-link text-success"
+            data-bs-toggle="modal"
+            data-bs-target="#locationDetails"
+            id="addLocation"
+            >Location
+            </button>
+        </li>
+        </ul>
+      </div>
+   </div> 
   </div>
+</nav>
   
   
 <!---------- ADD NEW/EDIT EMPLOYEE modal ------2 in 1---->
@@ -278,9 +282,7 @@
             
      <!-- end of location modal  -->
 
-      </div>   
-   </div>
-  </nav>
+   
     
       
     <!-- Table navigation tabs -->

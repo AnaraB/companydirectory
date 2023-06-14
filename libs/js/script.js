@@ -164,7 +164,6 @@ $('#employeeForm').on("submit", function(e) {
             department: $('#department').val()
         },
         success: function(result){
-            console.log('insert', result);
             $('#employeeAlert').text(result.data.message).removeClass('d-none');
             getAll();
             
@@ -226,7 +225,6 @@ $('#confirmToDeleteEmployee').on('click', function() {
             id: employeeId
         },
         success: function(result){
-            console.log('delete', result);
 
             $('#deleteEmployeeMessage').text(result.data.message).removeClass('d-none');
         },
@@ -338,7 +336,6 @@ $('#newDepartmentForm').on('submit', function(e) {
             name: $('#newDepartmentInput').val()
         },
         success: function(result){
-            console.log('insert', result);
             $('#departmentAlert').text(result.data.message).removeClass('d-none');
             getAllDepartments();
             
@@ -414,7 +411,6 @@ $(document).on('click','.deleteDepartmentInfo', function() {
             department_id: departmentId
         },
         success: function(result){
-            console.log('delete', result);
             $('#deleteDepartmentMessage').text(result.data.message).removeClass('d-none');
         },
         error: function(error){
@@ -511,7 +507,6 @@ $('#submitLocation').on('click', function() {
             name: $('#locationInput').val()
         },
         success: function(result){
-            console.log('insert', result);
             $('#locationAlert').text(result.data.message).removeClass('d-none');
             getAllLocations();
             
@@ -585,7 +580,6 @@ $(document).on('click','.deleteLocationInfo', function() {
             location_id: locationId
         },
         success: function(result){
-            console.log('delete', result);
             $('#deleteLocationMessage').text(result.data.message).removeClass('d-none');
         },
         error: function(error){
@@ -599,7 +593,7 @@ $(document).on('click','.deleteLocationInfo', function() {
 
 
 
-// ---------------------------------------------------------FORM VALIDATION section----------------------------------------------------------//
+
 
   
 
