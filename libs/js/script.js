@@ -2,8 +2,9 @@
 
 //------------------------------------------------SEARCH section--------------------------------------------//
 
+
 $('#searchSubmit').on('click', function (){
-    
+  
     $.ajax({
         method: 'POST',
         url: 'libs/php/search.php',
@@ -13,8 +14,10 @@ $('#searchSubmit').on('click', function (){
             search_value: $('#search').val()
         },
         success: function(result){
-          
-            populateEmployeesTab(result.data.personnel);
+            
+                 populateEmployeesTab(result.data.personnel);
+              
+                
 
         },
         error: function(error) {
@@ -22,6 +25,8 @@ $('#searchSubmit').on('click', function (){
         }
     })
 })
+
+
 
 ////---------------------------------------------------------- PERSONNEL section--------------------------------------------------////
 getAll();
@@ -32,7 +37,7 @@ function getAll() {
         url: 'libs/php/getAll.php',
         success: function(result) {
             const data = result.data;
-       
+        
             populateEmployeesTab(data);
         
         },
@@ -227,6 +232,7 @@ $('#confirmToDeleteEmployee').on('click', function() {
         success: function(result){
 
             $('#deleteEmployeeMessage').text(result.data.message).removeClass('d-none');
+            getAll();
         },
         error: function(error){
             console.error(error);
@@ -242,6 +248,7 @@ $('#confirmToDeleteEmployee').on('click', function() {
 getAllDepartments();
 
 function getAllDepartments() {
+
 
     $.ajax({
         method: 'GET',
@@ -337,8 +344,7 @@ $('#newDepartmentForm').on('submit', function(e) {
         },
         success: function(result){
             $('#departmentAlert').text(result.data.message).removeClass('d-none');
-            getAllDepartments();
-            
+          
         },
         error: function(error){
             console.error(error);
@@ -412,6 +418,8 @@ $(document).on('click','.deleteDepartmentInfo', function() {
         },
         success: function(result){
             $('#deleteDepartmentMessage').text(result.data.message).removeClass('d-none');
+            $('#dismissDeleteDepartment').text('Close');
+          
         },
         error: function(error){
             console.error(error);
@@ -508,7 +516,7 @@ $('#submitLocation').on('click', function() {
         },
         success: function(result){
             $('#locationAlert').text(result.data.message).removeClass('d-none');
-            getAllLocations();
+         
             
         },
         error: function(error){
@@ -520,6 +528,7 @@ $('#submitLocation').on('click', function() {
 //////////////////////// DELETE LOCATION modal //////////////////////
 
 $(document).on('click','.deleteLocationInfo', function() {
+    getAllLocations();
     const locationId = $(this).closest('tr').attr('data-id');
    
     $.ajax({
@@ -581,6 +590,7 @@ $(document).on('click','.deleteLocationInfo', function() {
         },
         success: function(result){
             $('#deleteLocationMessage').text(result.data.message).removeClass('d-none');
+         
         },
         error: function(error){
             console.error(error);

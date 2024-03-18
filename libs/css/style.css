@@ -8,7 +8,7 @@
 }
 
 .container{
-    width: 1000px;
+    max-width: 1000px;
 }
 
 
@@ -16,47 +16,24 @@
     width: 30px;
 }
 
-.fixTableHead{
+
+.tableHead{
+    background-color: white;
     position: sticky;
-    top: 0;
+    top: 50px;
+    height: 50px;
+  
  
    
 }
 
 @media only screen and (max-width: 62em) {
     
-     .navbar-nav{
+     .hamburgerElements{
       padding: 0.5em;
-      width: 12em;
+      max-width: 12em;
      
     }
-
-    .d-flex{
-        padding: .5em;
-        width: 12em;
-      }
-
-    .dropdown{
-    padding: 0.5em;
-
-    } 
-
-      
+  
     
-  }
-
-  @media only screen and (max-width: 37em) {
- 
-
-    .container{
-        width: 500px;
-    }
-
-    .navbar{
-        width: 100%;
-    }
-    
-    
-
-   
   }

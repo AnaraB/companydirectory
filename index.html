@@ -38,20 +38,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-          <span class="navbar-nav me-2 mb-2 mb-lg-0" role="navigation">   
+          <span class="navbar-nav me-2 mb-2 mb-lg-0 hamburgerElements" role="navigation">   
             <!---selectLocation in navigation used for search-->          
             <select class="btn btn-success dropdown-toggle selectLocation" name="locationInput" id="selectLocation">
                 <option value="">Location</option>
               </select>  
           </span>
           
-          <span class="navbar-nav me-auto mb-2 mb-lg-0" role="navigation">             
+          <span class="navbar-nav me-auto mb-2 mb-lg-0 hamburgerElements" role="navigation">             
             <select class="btn btn-success dropdown-toggle selectDepartment" name="departmentInput" id="selectDepartment">
                 <option value="">Department</option>
               </select>  
             </span>
          
-          <form class="d-flex" role="search" method="get">
+          <form class="d-flex hamburgerElements" role="search" method="get">
             <input
               class="form-control me-2"
               name="search"
@@ -70,7 +70,7 @@
           
 <!------------------------ADD dropdown to add employee/departmemt/location------------------>
 
-      <div class="dropdown">
+      <div class="dropdown hamburgerElements">
         <button class="btn btn-danger dropdown-toggle mx-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <!-- ADD ICON -->
           <!-- <i class="fa-solid fa-plus"></i> -->
@@ -335,7 +335,7 @@
               </button>
             </li>
           </ul>
-          <div class="tab-content" class="fixTableHead">
+          <div class="tab-content">
             <div
               class="tab-pane fade show active"
               id="home-tab-pane"
@@ -344,12 +344,12 @@
               tabindex="0"
             >
             <table class="table table-striped align-middle mb-0">
-              <thead>
+              <thead class="tableHead">
                 <tr>
                   <th scope="col">Name</th>
                   <th scope="col" class="d-none d-sm-none d-md-table-cell">Department</th>
                   <th scope="col" class="d-none d-sm-none d-md-table-cell">Location</th>
-                  <th class="col-sm">Details</th>
+                  <th class="col-sm px-2">Details</th>
                   <th class="col-sm">Edit</th>
                   <th class="col-sm">Delete</th>
                 </tr>
@@ -365,9 +365,9 @@
               tabindex="1"
             >
             <table class="table table-striped align-middle mb-0"">
-              <thead>
+              <thead class="tableHead">
                 <tr>
-                  <th scope="col"></th>
+                  <th scope="col">Name</th>
                   <th class="col-sm">Edit</th>
                   <th class="col-sm">Delete</th>   
                 </tr>
@@ -384,9 +384,9 @@
               tabindex="2"
             >
             <table class="table table-striped align-middle mb-0"">
-              <thead>
+              <thead class="tableHead">
                 <tr>
-                  <th scope="col"></th>
+                  <th scope="col">Name</th>
                   <th class="col-sm">Edit</th>
                   <th class="col-sm">Delete</th>
                 </tr>
